@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 float prod(float multiplicand, int multiplicator){
 	int is_negative = 0;
 	if(multiplicator < 0){
