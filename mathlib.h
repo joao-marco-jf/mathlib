@@ -14,5 +14,11 @@ float calc_s_fib(unsigned int nth);
 float calc_s_succ(unsigned int n);
 int is_perfect(int num);
 int succ_is_perfect(unsigned int n);
+float pi();
+float sen(float x);
 float cos(unsigned int x);
 int nth_fetuccine(unsigned int n, int n1, int n2);
+int is_triangular(int num);
+double sum_nth_ricci(int nth, int n1, int n2);
+int cp_nums(unsigned int n1, unsigned int n2);
+

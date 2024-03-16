@@ -25,8 +25,8 @@ int rem(unsigned int dividend, unsigned int divisor){
 }
 
 float div(unsigned int dividend, unsigned int divisor){
-	int safe_memory;
-	float quotient;
+	int safe_memory = 0;
+	float quotient = 0.0;
 	float increment = 1;
 	while(dividend != 0 && safe_memory < 256){
 		dividend = dividend - divisor;
@@ -127,7 +127,7 @@ int odd_succ(unsigned int num){
 float euler(unsigned int n){
 	if(n < 10) return -1;
 
-	float euler;
+	float euler = 0.0;
 	for (int i = 0; i < n; i++){
 		euler = euler + 1/(float)(fact(i));
 	}
@@ -152,6 +152,21 @@ float calc_s_succ(unsigned int n){
 	}
 	return result;
 }
+double cube_root_bin_search(double num) {
+	double init = 0.0;
+	double end = num;
+	double middle;
+
+	while (end - init > 0.00001) {
+		middle = (init + end) / 2;
+		if (pow(middle, 3) < num) {
+			init = middle;
+		} else {
+			end = middle;
+		}
+	}
+	return (init + end) / 2;
+}
 
 int is_perfect(int num){
 	int sum = 0;
@@ -169,9 +184,60 @@ int succ_is_perfect(unsigned int n){
 	return -1;
 }
 
+int nth_fetuccine(unsigned int n, int n1, int n2){
+	int ult = n2;
+	int penult = n1;
+	int term;
+
+	if(n == 1) return n1;
+	else if(n == 2) return n2;
+
+	for(int i = 2; i < n; i++){
+		if(rem(i, 2) == 0){
+			term = ult + penult;
+			penult = ult;
+			ult = term;
+		}
+		else if (rem(i, 2) != 0){
+			term = ult - penult;
+			penult = ult;
+			ult = term;
+		}
+	}
+	return term;
+}
+
+float pi() {
+	int odd;
+	float S = 0, t, t2;
+
+	for (int i = 0; i < 51; i++)
+	{
+		odd = 2 * i + 1;
+		S += (pow(-1, i)) / pow(odd, 3);
+	}
+
+	return cube_root_bin_search(S*32);
+}
+
+float sen(float x) {
+	int odd;
+	float sen = 0, rad;
+
+	rad = x * (pi()/180);
+
+	for (int i = 0; i < 15; i++)
+	{
+		odd = (2*i) + 1;
+		sen += (pow(-1, i) * pow(rad, odd)) / fact(odd);
+	}
+
+	return sen;
+}
+
 float cos(unsigned int x){
-	float x_rad = (x * 3.14159)/180;
-	double result;
+	float x_rad = (x * pi())/180;
+	double result = 0.0;
 	for (int i = 0; i < 15; i++){
 		float pow1 = pow(-1, i);
 		float pow2 = pow(x_rad, 2 * i);
@@ -181,24 +247,37 @@ float cos(unsigned int x){
 	return result;
 }
 
-int nth_fetuccine(unsigned int n, int n1, int n2){
-        int ult = n2;
-        int penult = n1;
-        int term;
-        if(n == 1) return n1;
-        else if(n == 2) return n2;
-        for(int i = 2; i < n; i++){
-                if(rem(i, 2) == 0){
-                        term = ult + penult;
-                        penult = ult;
-                        ult = term;
-                }
-                else if (rem(i, 2) != 0){
-                        term = ult - penult;
-                        penult = ult;
-                        ult = term;
-                }
-        }
-        return term;
+int is_triangular(int num) {
+	int i, result;
+
+	for(i = 1; prod(prod(i, i+1), i+2) <= num; i++)
+		result = prod(prod(i, i+1), i+2);
+	
+	return result == num ? 1 : 0;
 }
 
+double sum_nth_ricci(int nth, int n1, int n2) {
+	int ricci;
+	double sum = 0;
+
+	ricci = nth_ricci(nth, n1, n2);
+
+	for (int i = 1; i <= ricci; i++)
+	{
+		sum += 1 / pow(i, i);
+	}
+	
+	return sum;
+}
+
+int cp_nums(unsigned int n1, unsigned int n2) {
+	if (is_prime(n1) == 1 && is_prime(n2) == 1) return 1;
+	int result = 1;
+	for (int i = 2; i <= n1; i++){
+		if(rem(n1, i) == 0 && rem(n2, i) == 0){
+			result = -1;
+			break;
+		}
+	}
+	return result;
+}
