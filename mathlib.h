@@ -1,0 +1,18 @@
+float prod(float multiplicand, int multiplicator);
+float pow(float base, unsigned int exp);
+int rem(unsigned int dividend, unsigned int divisor);
+float div(unsigned int dividend, unsigned int divisor);
+int fact(unsigned int num);
+int peer_succ(unsigned int num);
+int is_prime(unsigned int num);
+int nth_fib(int nth);
+int sum_ricci(int nth, int n1, int n2);
+int nth_ricci(int nth, int n1, int n2);
+int odd_succ(unsigned int num);
+float euler(unsigned int n);
+float calc_s_fib(unsigned int nth);
+float calc_s_succ(unsigned int n);
+int is_perfect(int num);
+int succ_is_perfect(unsigned int n);
+float cos(unsigned int x);
+int nth_fetuccine(unsigned int n, int n1, int n2);
